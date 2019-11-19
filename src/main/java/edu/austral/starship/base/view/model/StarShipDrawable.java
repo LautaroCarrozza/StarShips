@@ -5,14 +5,12 @@ import edu.austral.starship.base.model.StarShip;
 import edu.austral.starship.base.model.constants.Configs;
 import edu.austral.starship.base.model.constants.Image;
 import edu.austral.starship.base.vector.Vector2;
-import edu.austral.starship.base.view.Drawable;
+import edu.austral.starship.base.view.DrawableEntity;
 import edu.austral.starship.base.view.GameView;
 import processing.core.PGraphics;
 import processing.core.PImage;
 
-import java.awt.*;
-
-public class StarShipDrawable implements Drawable {
+public class StarShipDrawable implements DrawableEntity {
 
     private final StarShip starShip;
 
@@ -21,12 +19,7 @@ public class StarShipDrawable implements Drawable {
     }
 
     @Override
-    public Shape getShape() {
-        return this.starShip.getShape();
-    }
-
-    @Override
-    public void updatePosition(PGraphics graphics) {
+    public void updateView(PGraphics graphics) {
         PImage image = GameView.getPImage(getIMAGE());
         graphics.image(image, getPosition().getX(), getPosition().getY(), Configs.STARSHIP_WIDTH, Configs.STARSHIP_HEIGHT);
 

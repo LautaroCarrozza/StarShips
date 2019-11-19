@@ -14,7 +14,7 @@ public class Configs {
     public static final int WINDOW_HEIGHT = 1000;
 
     public static final int STARSHIP_WIDTH = 100;
-    public static final int STARSHIP_HEIGHT = 150;
+    public static final int STARSHIP_HEIGHT = 100;
 
     public static final int ASTEROID_HEIGHT = 150;
     public static final int ASTEROID_WIDTH = 150;
@@ -25,7 +25,10 @@ public class Configs {
     public static final int LASER_SPRITE_WIDTH = 25;
     public static final int LASER_SPRITE_HEIGHT = 50;
 
-    public static final int INITIAL_LIVES = 1;
+    public static final float GAME_OVER_WIDTH = WINDOW_WIDTH >> 1;
+    public static final float GAME_OVER_HEIGHT = WINDOW_HEIGHT >> 1;
+
+    public static final int INITIAL_LIVES = 3;
     public static final int DEFAULT_SPEED = 10;
     public static final float SHOT_SPEED = 15;
 
@@ -43,5 +46,6 @@ public class Configs {
     public static final Vector2 BACKWARD_VECTOR = new Vector2(0, 1);
     public static final Vector2 LEFT_VECTOR = new Vector2(-1, 0);
     public static final Vector2 RIGHT_VECTOR = new Vector2(1, 0);
+
 
 }

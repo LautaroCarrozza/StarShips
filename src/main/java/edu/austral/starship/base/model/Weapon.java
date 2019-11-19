@@ -19,10 +19,8 @@ public abstract class Weapon {
         return bullet;
     }
 
-    public void shoot() {
-        Shot shot = new Shot(bullet, position, direction);
-        GameView.addDrawable(new ShotDrawable(shot, bullet.getImage(), bullet.getWidth(), bullet.getHeight()));
-        GameController.addCollisionable(shot);
+    public void shoot(Player player) {
+        bullet.shot(player, position, direction);
     }
 
     public Vector2 getPosition() {

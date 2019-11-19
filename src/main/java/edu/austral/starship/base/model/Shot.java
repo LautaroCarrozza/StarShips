@@ -9,6 +9,7 @@ import java.awt.geom.Rectangle2D;
 
 public class Shot implements Collisionable {
 
+    private Player player;
     private Bullet bullet;
     private Vector2 position;
     private Vector2 direction;
@@ -16,7 +17,8 @@ public class Shot implements Collisionable {
     private boolean alive;
     private Shape shape;
 
-    public Shot(Bullet bullet, Vector2 position, Vector2 direction) {
+    public Shot(Bullet bullet, Vector2 position, Vector2 direction, Player player) {
+        this.player = player;
         this.bullet = bullet;
         this.position = position;
         this.direction = direction;
@@ -31,8 +33,9 @@ public class Shot implements Collisionable {
 
     @Override
     public void collisionedWith(Collisionable collisionable) {
-        if (collisionable.getType().equals(CollisionableType.ASTEROID))
+        if (collisionable.getType().equals(CollisionableType.ASTEROID)) {
             this.alive = false;
+        }
     }
 
     @Override
@@ -68,5 +71,9 @@ public class Shot implements Collisionable {
 
     public boolean isAlive() {
         return alive;
+    }
+
+    public Player getPlayer() {
+        return player;
     }
 }

@@ -1,12 +1,13 @@
 package edu.austral.starship.base.model;
 
 import edu.austral.starship.base.collision.Collisionable;
+import edu.austral.starship.base.controller.GameController;
 import edu.austral.starship.base.model.constants.Action;
 import edu.austral.starship.base.model.constants.Configs;
 import edu.austral.starship.base.vector.Vector2;
 
 import java.awt.*;
-import java.awt.geom.Rectangle2D;
+import java.awt.geom.Ellipse2D;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Queue;
@@ -28,7 +29,7 @@ public class StarShip implements Collisionable {
         this.weapons.add(activeWeapon);
 
         this.lives = Configs.INITIAL_LIVES;
-        this.shape = new Rectangle2D.Float(position.getX(), position.getY(), Configs.STARSHIP_WIDTH, Configs.STARSHIP_HEIGHT);
+        this.shape = new Ellipse2D.Float(position.getX(), position.getY(), Configs.STARSHIP_WIDTH, Configs.STARSHIP_HEIGHT);
 
         this.position = position;
         this.direction = direction;
@@ -43,8 +44,10 @@ public class StarShip implements Collisionable {
 
     @Override
     public void collisionedWith(Collisionable collisionable) {
-        if (!collisionable.getType().equals(CollisionableType.SHOT))
-            lives --;
+        if (!collisionable.getType().equals(CollisionableType.SHOT)) {
+            lives--;
+            GameController.playerCollision();
+        }
     }
 
     @Override
@@ -68,7 +71,7 @@ public class StarShip implements Collisionable {
     }
 
     private void moveShape() {
-        shape = new Rectangle2D.Float(position.getX(), position.getY(), Configs.STARSHIP_WIDTH, Configs.STARSHIP_HEIGHT);
+        shape = new Ellipse2D.Float(position.getX(), position.getY(), Configs.STARSHIP_WIDTH, Configs.STARSHIP_HEIGHT);
     }
 
     public void moveForward() {
@@ -83,8 +86,8 @@ public class StarShip implements Collisionable {
         //this.speed = speed + 1;
     }
 
-    public void shoot() {
-        activeWeapon.shoot();
+    public void shoot(Player player) {
+        activeWeapon.shoot(player);
     }
 
     public void rotate(Action action) {
@@ -126,4 +129,9 @@ public class StarShip implements Collisionable {
         this.activeWeapon.setDirection(Configs.FORWARD_VECTOR);
         //activeWeapon.setDirection(direction);
     }
+
+    public int getLives() {
+        return this.lives;
+    }
+
 }

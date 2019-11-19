@@ -3,6 +3,7 @@ package edu.austral.starship.base.controller;
 import edu.austral.starship.base.collision.CollisionEngine;
 import edu.austral.starship.base.collision.Collisionable;
 import edu.austral.starship.base.model.Player;
+import edu.austral.starship.base.model.PlayerStats;
 import edu.austral.starship.base.model.StarShip;
 import edu.austral.starship.base.model.Weapon;
 import edu.austral.starship.base.model.constants.Configs;
@@ -12,15 +13,14 @@ import edu.austral.starship.base.view.GameView;
 import edu.austral.starship.base.view.model.StarShipDrawable;
 import processing.event.KeyEvent;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
+import java.util.*;
 
 
 public class GameController{
 
     private PlayerController playerController = new PlayerController();
     private List<Weapon> gameWeapons;
+    private static Map<Player, PlayerStats> playersStats = new HashMap<>();
     private static List<Collisionable> collisionables = new ArrayList<>();
     private final CollisionEngine collisionEngine = new CollisionEngine();
     private static final Spawner spawner = new Spawner();
@@ -28,6 +28,15 @@ public class GameController{
 
     public GameController() {
         gameWeapons = Configs.GAME_WEAPONS;
+    }
+
+    public static void asteroidDestroyByPlayer(Player player, int points) {
+        PlayerStats stats = playersStats.get(player);
+        stats.sumScore(points);
+    }
+
+    public static void playerCollision(){
+        playersStats.forEach((p, s)-> s.updateLives());
     }
 
     public void onKeyPressedEvent(int keyCode){
@@ -50,10 +59,14 @@ public class GameController{
 
     public void createPlayer() {
         StarShip starship = new StarShip(new Vector2(500, 500), new Vector2(0, 1), gameWeapons);
-        playerController.setPlayer(new Player(starship));
+        Player player = new Player(starship);
+        playerController.setPlayer(player);
+        PlayerStats pStats =  new PlayerStats(player);
+        playersStats.put(player, pStats);
 
         GameView.addDrawable(new StarShipDrawable(starship));
         GameController.addCollisionable(starship);
+        GameView.addPlayerStats(playersStats.get(player));
     }
 
     public void updateGame() {

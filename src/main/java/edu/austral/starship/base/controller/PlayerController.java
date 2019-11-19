@@ -50,7 +50,7 @@ public class PlayerController {
                 break;
             }
             case SHOOT:
-                ship.shoot();
+                ship.shoot(player);
                 break;
 
             case MOVE_LEFT:

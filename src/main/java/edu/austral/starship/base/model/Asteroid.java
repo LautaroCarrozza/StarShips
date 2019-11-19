@@ -1,6 +1,7 @@
 package edu.austral.starship.base.model;
 
 import edu.austral.starship.base.collision.Collisionable;
+import edu.austral.starship.base.controller.GameController;
 import edu.austral.starship.base.vector.Vector2;
 
 import java.awt.*;
@@ -15,6 +16,7 @@ public class Asteroid implements Collisionable {
     private int width;
     private int height;
     private int life;
+    private int initLife;
     private Shape shape;
 
     public Asteroid(Vector2 position, Vector2 direction, float speed, int width) {
@@ -24,6 +26,7 @@ public class Asteroid implements Collisionable {
         this.width = width;
         this.height = this.width;
         this.life = width * 2;
+        this.initLife = life;
         this.shape = new Ellipse2D.Float(position.getX() , position.getY(), width, height);
     }
 
@@ -75,6 +78,8 @@ public class Asteroid implements Collisionable {
         if (collisionableType.equals(CollisionableType.SHOT)){
             Shot shoot = (Shot) collisionable;
             this.life -= shoot.getBullet().getStrength();
+            if (life <=0 )
+                GameController.asteroidDestroyByPlayer(shoot.getPlayer(), initLife);
         }
         else if (collisionableType.equals(CollisionableType.ASTEROID)) {
             //do nothing

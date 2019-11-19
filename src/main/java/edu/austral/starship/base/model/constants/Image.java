@@ -4,9 +4,8 @@ public enum Image {
     BACKGROUND,
     STARSHIP,
     ASTEROID,
-    MISSILE,
-    LASER,
     MISSILE_BULLET,
     LASER_BULLET,
-    GAME_OVER
+    GAME_OVER,
+    LIVES
 }

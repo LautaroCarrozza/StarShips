@@ -4,14 +4,12 @@ import edu.austral.starship.base.controller.GameController;
 import edu.austral.starship.base.model.Asteroid;
 import edu.austral.starship.base.model.constants.Image;
 import edu.austral.starship.base.vector.Vector2;
-import edu.austral.starship.base.view.Drawable;
+import edu.austral.starship.base.view.DrawableEntity;
 import edu.austral.starship.base.view.GameView;
 import processing.core.PGraphics;
 import processing.core.PImage;
 
-import java.awt.*;
-
-public class AsteroidDrawable implements Drawable {
+public class AsteroidDrawable implements DrawableEntity {
 
     private final Asteroid asteroid;
 
@@ -20,12 +18,7 @@ public class AsteroidDrawable implements Drawable {
     }
 
     @Override
-    public Shape getShape() {
-        return null;
-    }
-
-    @Override
-    public void updatePosition(PGraphics graphics) {
+    public void updateView(PGraphics graphics) {
         if (asteroid.getLife() <= 0) {
             GameView.addDrawableToRemove(this);
             removeEntity();

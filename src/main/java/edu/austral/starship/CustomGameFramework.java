@@ -23,7 +23,8 @@ public class CustomGameFramework implements GameFramework{
         windowsSettings
             .setSize(Configs.WINDOW_WIDTH, Configs.WINDOW_HEIGHT);
 
-        gameView.addPImage(Image.STARSHIP, imageLoader.load("images/Spaceship-PNG-File.png"));
+        //gameView.addPImage(Image.STARSHIP, imageLoader.load("images/Spaceship-PNG-File.png"));
+        gameView.addPImage(Image.STARSHIP, imageLoader.load("images/starShip.png"));
         gameView.addPImage(Image.ASTEROID, imageLoader.load("src/main/resources/images/asteroid2.png"));
         gameView.addPImage(Image.LASER_BULLET, imageLoader.load("images/laser_sprite.png"));
         gameView.addPImage(Image.MISSILE_BULLET, imageLoader.load("images/missile_sprite.png"));

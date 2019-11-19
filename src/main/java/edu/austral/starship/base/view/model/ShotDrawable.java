@@ -5,13 +5,11 @@ import edu.austral.starship.base.model.Shot;
 import edu.austral.starship.base.model.constants.Configs;
 import edu.austral.starship.base.model.constants.Image;
 import edu.austral.starship.base.vector.Vector2;
-import edu.austral.starship.base.view.Drawable;
+import edu.austral.starship.base.view.DrawableEntity;
 import edu.austral.starship.base.view.GameView;
 import processing.core.PGraphics;
 
-import java.awt.*;
-
-public class ShotDrawable implements Drawable {
+public class ShotDrawable implements DrawableEntity {
 
     private final Shot shot;
     private final Image image;
@@ -25,13 +23,9 @@ public class ShotDrawable implements Drawable {
         this.bulletHeight = bulletHeight;
     }
 
-    @Override
-    public Shape getShape() {
-        return shot.getShape();
-    }
 
     @Override
-    public void updatePosition(PGraphics graphics) {
+    public void updateView(PGraphics graphics) {
         if (!shot.isAlive()) {
             GameView.addDrawableToRemove(this);
             removeEntity();

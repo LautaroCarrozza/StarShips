@@ -1,6 +1,7 @@
 package edu.austral.starship.base.model;
 
 import edu.austral.starship.base.model.constants.Image;
+import edu.austral.starship.base.vector.Vector2;
 
 public abstract class Bullet {
 
@@ -31,4 +32,6 @@ public abstract class Bullet {
     public int getStrength() {
         return strength;
     }
+
+    public abstract void shot(Player player, Vector2 position, Vector2 direction);
 }
