@@ -5,6 +5,7 @@ import edu.austral.starship.base.model.constants.Configs;
 import edu.austral.starship.base.vector.Vector2;
 
 import java.awt.*;
+import java.awt.geom.Ellipse2D;
 import java.awt.geom.Rectangle2D;
 
 public class Shot implements Collisionable {
@@ -23,7 +24,7 @@ public class Shot implements Collisionable {
         this.position = position;
         this.direction = direction;
         this.alive = true;
-        this.shape = new Rectangle2D.Float((position.getX() + Configs.STARSHIP_WIDTH),
+        this.shape = new Ellipse2D.Float((position.getX() + Configs.STARSHIP_WIDTH),
                 position.getY(), bullet.getWidth(), bullet.getHeight());
     }
 
@@ -49,7 +50,7 @@ public class Shot implements Collisionable {
     }
 
     private void moveShape() {
-        shape = new Rectangle2D.Float((position.getX() + (Configs.STARSHIP_WIDTH - bullet.getWidth() >>1)),
+        shape = new Ellipse2D.Float((position.getX() + (Configs.STARSHIP_WIDTH - bullet.getWidth() >>1)),
                 position.getY(), bullet.getWidth(), bullet.getHeight());
     }
 

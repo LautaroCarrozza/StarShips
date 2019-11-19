@@ -69,7 +69,7 @@ public class PlayerController {
                 break;
             }
             case CHANGE_WEAPON:
-                ship.changeWeapon();
+                //ship.changeWeapon();
                 break;
 
             default:
@@ -79,6 +79,13 @@ public class PlayerController {
 
     public void onReleased(KeyEvent event) {
         player.getStarship().resetSpeed();
+
+        if(keyConfiguration.containsKey(event.getKeyCode())){
+            Action action = keyConfiguration.get(event.getKeyCode());
+            if (action == Action.CHANGE_WEAPON)
+                player.getStarship().changeWeapon();
+        }
+
     }
 
     public boolean playerIsAlive(){

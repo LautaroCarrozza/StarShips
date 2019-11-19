@@ -14,10 +14,11 @@ public class Spawner {
     private static final Random random = new Random();
 
     public void spawnAsteroid() {
-        Asteroid asteroid = new Asteroid(getRandomPosition(),
+        int width = getRandomWidth();
+        Asteroid asteroid = new Asteroid(getRandomPosition(width),
                 getRandomDirection(),
                 getRandomSpeed(),
-                getRandomWidth());
+                width);
         GameController.addCollisionable(asteroid);
         GameView.addDrawable(new AsteroidDrawable(asteroid));
     }
@@ -30,14 +31,14 @@ public class Spawner {
         return Configs.ASTEROID_MIN_SPEED + random.nextFloat() * (Configs.ASTEROID_MAX_SPEED - Configs.ASTEROID_MIN_SPEED);
     }
 
-    private Vector2 getRandomPosition() {
+    private Vector2 getRandomPosition(int width) {
         Vector2 position;
         int r = random.nextInt(4);
         if (r == 0 || r == 1){
-            position = new Vector2(r == 0 ? 0 : Configs.WINDOW_WIDTH , random.nextInt(Configs.WINDOW_HEIGHT));
+            position = new Vector2(r == 0 - width ? 0 : Configs.WINDOW_WIDTH + width, random.nextInt(Configs.WINDOW_HEIGHT));
         }
         else {
-            position = new Vector2(random.nextInt(Configs.WINDOW_WIDTH), r == 2 ? 0 : Configs.WINDOW_HEIGHT);
+            position = new Vector2(random.nextInt(Configs.WINDOW_WIDTH), r == 2 ? 0 - width : Configs.WINDOW_HEIGHT + width);
         }
         return position;
     }

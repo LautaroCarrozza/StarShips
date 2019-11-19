@@ -70,7 +70,7 @@ public class GameController{
     }
 
     public void updateGame() {
-        int r = RANDOM.nextInt(20);
+        int r = RANDOM.nextInt(30);
         if (r == 1){
             spawner.spawnAsteroid();
         }
